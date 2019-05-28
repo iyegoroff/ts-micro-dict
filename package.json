@@ -1,0 +1,58 @@
+{
+  "name": "ts-micro-dict",
+  "version": "0.0.0",
+  "description": "Functions for representing plain object as typesafe immutable dictionary",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "preversion": "npm run lint && npm run build && npm t",
+    "build": "rm -rf dist && mkdir dist && tsc -p .",
+    "lint": "tslint -p . && tslint test/*",
+    "watch": "npm run build -- --watch",
+    "test": "jest",
+    "coverage": "codecov"
+  },
+  "keywords": [
+    "dictionary",
+    "typescript",
+    "immutable"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "test"
+  ],
+  "author": "iyegoroff <iegoroff@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iyegoroff/ts-micro-dict/issues"
+  },
+  "homepage": "https://github.com/iyegoroff/ts-micro-dict#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iyegoroff/ts-micro-dict.git"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "codecov": "^3.5.0",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-immutable": "^5.5.2",
+    "typescript": "^3.4.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "coverageDirectory": "coverage",
+    "collectCoverage": true,
+    "testEnvironment": "node"
+  }
+}

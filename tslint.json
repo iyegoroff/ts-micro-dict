@@ -1,0 +1,30 @@
+{
+  "extends": ["tslint-config-standard", "tslint-immutable"],
+  "rules": {
+    "typedef": [true, "call-signature"],
+    "strict-boolean-expressions": true,
+    "no-parameter-reassignment": true,
+    "no-shadowed-variable": true,
+    "max-line-length": [true, 100],
+    "max-file-line-count": [true, 300],
+    "ter-indent": [true, 2, { "SwitchCase": true }],
+    "space-before-function-paren": [true, {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "readonly-keyword": true,
+    "no-array-mutation": true,
+    "no-method-signature": true,
+    "no-delete": true,
+    "no-mixed-interface": true,
+    "no-loop-statement": true,
+    "no-throw": true,
+    "no-try": true,
+    "no-reject": true,
+    "no-any": true,
+    "ban-ts-ignore": true,
+    "no-null-keyword": true,
+    "prefer-const": true
+  }
+}
