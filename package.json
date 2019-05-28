@@ -1,6 +1,6 @@
 {
   "name": "ts-micro-dict",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Functions for representing plain objects as typesafe immutable dictionaries",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
