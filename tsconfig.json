@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "target": "es6",
+    "target": "es5",
+    "module": "umd",
     "strict": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "declaration": true,
-    "esModuleInterop": true
+    "removeComments": true,
+    "esModuleInterop": true,
+    "types": ["jest"]
   },
   "exclude": [
     "node_modules",
