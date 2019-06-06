@@ -16,7 +16,7 @@ Functions for representing plain objects as typesafe immutable dictionaries
 ## Usage
 
 ```typescript
-import { Dict, put, omit, toArray, dict } from 'ts-micro-dict'
+import { Dict, put, omit, toArray, dict, fromArray } from 'ts-micro-dict'
 
 // explicitly initialize a Dict with plain object
 const initial: Dict<number> = { key: 1 }
@@ -58,6 +58,9 @@ console.log(arr) // [['key', 1], ['test', 123]]
 // entries with undefined values will be removed from toArray result
 const oops = dict({ key: 1, oops: undefined, test: 123 })
 
-console.log(toArrray(oops)) // [['key', 1], ['test', 123]]
+console.log(toArray(oops)) // [['key', 1], ['test', 123]]
+
+// dict, previously converted to array, can be converted back with fromArray
+console.log(fromArray(toArray(oops))) // { key: 1, test: 123 }
 
 ```

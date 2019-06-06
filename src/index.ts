@@ -1,6 +1,8 @@
 export type Dict<T> = {
-  readonly [id: string]: NonNullable<T> | undefined
+  readonly [key: string]: NonNullable<T> | undefined
 }
+
+export type KeyValueArray<T> = ReadonlyArray<Readonly<[string, NonNullable<T>]>>
 
 /**
  * Creates a new `Dict` from a dict-like object.
@@ -46,14 +48,14 @@ export const omit = <T>(dict: Dict<T>, key: string): Dict<T> => (
 )
 
 /**
- * Converts a `Dict` to array
+ * Converts a `Dict` to `KeyValueArray`
  *
  * Entries containing `undefined` values will be skipped
  *
  * @param dict original `Dict`
  * @returns Array of `Dict` entries
  */
-export const toArray = <T>(dict: Dict<T>): ReadonlyArray<Readonly<[string, NonNullable<T>]>> => (
+export const toArray = <T>(dict: Dict<T>): KeyValueArray<T> => (
   Object.keys(dict).reduce(
     (acc, key) => {
       const val = dict[key]
@@ -66,4 +68,14 @@ export const toArray = <T>(dict: Dict<T>): ReadonlyArray<Readonly<[string, NonNu
     },
     [] as [string, NonNullable<T>][]
   )
+)
+
+/**
+ * Converts a `KeyValueArray` to `Dict`
+ *
+ * @param array Array of `Dict` entries
+ * @returns `Dict`
+ */
+export const fromArray = <T>(array: KeyValueArray<T>): Dict<T> => (
+  array.reduce((acc, [key, val]) => put(acc, key, val), {})
 )

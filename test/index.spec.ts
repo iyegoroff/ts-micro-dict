@@ -1,4 +1,4 @@
-import { dict, put, omit, toArray, Dict } from '../src'
+import { dict, put, omit, toArray, Dict, fromArray, KeyValueArray } from '../src'
 
 test('put - key doesn\'t exist', () => {
   const initial = dict<number>()
@@ -39,4 +39,12 @@ test('toArray', () => {
   expect(toArray(initial)).toEqual(expected)
   expect(initial).toEqual({ test: 123, oops: undefined, key: 321 })
   expect(Object.keys(initial)).toEqual(['test', 'oops', 'key'])
+})
+
+test('fromArray', () => {
+  const initial: KeyValueArray<number> = [['test', 123], ['key', 321]]
+  const expected: Dict<number> = { test: 123, key: 321 }
+
+  expect(fromArray(initial)).toEqual(expected)
+  expect(initial).toEqual([['test', 123], ['key', 321]])
 })
