@@ -22,10 +22,9 @@ export const dict = <T>(o: Dict<T> = {}): Dict<T> => o
  * @param value entry value
  * @returns `Dict`
  */
-export const put = <T>(dict: Dict<T>, key: string, value: NonNullable<T>): Dict<T> => ({
-  ...dict,
-  [key]: value
-})
+export const put = <T>(dict: Dict<T>, key: string, value: NonNullable<T>): Dict<T> => (
+  Object.assign({}, dict, { [key]: value })
+)
 
 /**
  * Creates a new `Dict` by removing an entry from existing `Dict`
@@ -76,6 +75,11 @@ export const toArray = <T>(dict: Dict<T>): KeyValueArray<T> => (
  * @param array Array of `Dict` entries
  * @returns `Dict`
  */
-export const fromArray = <T>(array: KeyValueArray<T>): Dict<T> => (
-  array.reduce((acc, [key, val]) => put(acc, key, val), {})
-)
+export const fromArray = <T>(array: KeyValueArray<T>): Dict<T> => {
+  const dict: { [key: string]: T } = {}
+  for (const [key, value] of array) {
+    dict[key] = value
+  }
+
+  return dict as Dict<T>
+}

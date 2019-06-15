@@ -12,11 +12,9 @@
       "named": "never",
       "asyncArrow": "always"
     }],
-    "readonly-keyword": true,
     "no-method-signature": true,
     "no-delete": true,
     "no-mixed-interface": true,
-    "no-loop-statement": true,
     "no-throw": true,
     "no-try": true,
     "no-reject": true,
