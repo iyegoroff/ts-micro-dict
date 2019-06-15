@@ -23,7 +23,7 @@ export const dict = <T>(o: Dict<T> = {}): Dict<T> => o
  * @returns `Dict`
  */
 export const put = <T>(dict: Dict<T>, key: string, value: NonNullable<T>): Dict<T> => (
-  Object.assign({}, dict, { [key]: value })
+  { ...dict, [key]: value }
 )
 
 /**
