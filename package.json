@@ -49,6 +49,11 @@
     "typescript": "^3.4.5"
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.test.json"
+      }
+    },
     "moduleFileExtensions": [
       "js",
       "ts"

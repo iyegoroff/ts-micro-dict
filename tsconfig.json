@@ -6,7 +6,8 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "removeComments": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": []
   },
   "exclude": [
     "node_modules",
