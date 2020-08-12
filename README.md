@@ -17,12 +17,12 @@ Functions for representing plain objects as typesafe immutable dictionaries
 ## Usage
 
 ```typescript
-import { Dict, put, omit, toArray, dict, fromArray } from 'ts-micro-dict'
+import { Dict } from 'ts-micro-dict'
 
 // explicitly initialize a Dict with plain object
 const initial: Dict<number> = { key: 1 }
-// or infer entry value type with dict function
-const alt = dict({ key: 1 })
+// or infer entry value type with create function
+const alt = Dict.create({ key: 1 })
 
 console.log(initial) // { key: 1 }
 console.log(alt) // { key: 1 }
@@ -40,33 +40,33 @@ const x: number = initial['test']
 const y: number | undefined = initial['test']
 
 // create another Dict by adding an entry to existing Dict
-const another = put(initial, 'test', 123)
+const another = Dict.put(initial, 'test', 123)
 
 console.log(another) // { key: 1, test: 123 }
 console.log(initial) // { key: 1 }
 
 // create new Dict by removing an entry from existing Dict
-const newDict = omit(another, 'key')
+const newDict = Dict.omit(another, 'key')
 
 console.log(newDict) // { test: 123 }
 console.log(another) // { key: 1, test: 123 }
 
 // converting Dict to readonly array
-const arr = toArray(another)
+const arr = Dict.toArray(another)
 
 console.log(arr) // [['key', 1], ['test', 123]]
 
 // entries with undefined values will be removed from toArray result
-const oops = dict({ key: 1, oops: undefined, test: 123 })
+const oops = Dict.create({ key: 1, oops: undefined, test: 123 })
 
-console.log(toArray(oops)) // [['key', 1], ['test', 123]]
+console.log(Dict.toArray(oops)) // [['key', 1], ['test', 123]]
 
 // dict, previously converted to array, can be converted back with fromArray
-console.log(fromArray(toArray(oops))) // { key: 1, test: 123 }
+console.log(Dict.fromArray(Dict.toArray(oops))) // { key: 1, test: 123 }
 
 // filter
-console.log(filter(oops, x => x > 10)) // { test: 123 }
+console.log(Dict.filter(oops, x => x > 10)) // { test: 123 }
 
 // map
-console.log(map(oops, x => `${x}`)) // { key: '1', test: '123' }
+console.log(Dict.map(oops, x => `${x}`)) // { key: '1', test: '123' }
 ```
