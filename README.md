@@ -1,11 +1,12 @@
 # ts-micro-dict
+
 [![npm version](https://badge.fury.io/js/ts-micro-dict.svg?t=1495378566925)](https://badge.fury.io/js/ts-micro-dict)
 [![CircleCI](https://circleci.com/gh/iyegoroff/ts-micro-dict.svg?style=svg)](https://circleci.com/gh/iyegoroff/ts-micro-dict)
 [![codecov](https://codecov.io/gh/iyegoroff/ts-micro-dict/branch/master/graph/badge.svg?t=1520230083925)](https://codecov.io/gh/iyegoroff/ts-micro-dict)
 [![Dependency Status](https://david-dm.org/iyegoroff/ts-micro-dict.svg?t=1495378566925)](https://david-dm.org/iyegoroff/ts-micro-dict)
 [![devDependencies Status](https://david-dm.org/iyegoroff/ts-micro-dict/dev-status.svg)](https://david-dm.org/iyegoroff/ts-micro-dict?type=dev)
 [![typings included](https://img.shields.io/badge/typings-included-brightgreen.svg?t=1495378566925)](src/index.d.ts)
-[![npm](https://img.shields.io/npm/l/express.svg?t=1495378566925)](https://www.npmjs.com/package/ts-micro-dict)
+[![npm](https://img.shields.io/npm/l/ts-micro-dict.svg?t=1495378566925)](https://www.npmjs.com/package/ts-micro-dict)
 
 Functions for representing plain objects as typesafe immutable dictionaries
 
@@ -24,7 +25,7 @@ const initial: Dict<number> = { key: 1 }
 const alt = dict({ key: 1 })
 
 console.log(initial) // { key: 1 }
-console.log(alt)     // { key: 1 }
+console.log(alt) // { key: 1 }
 
 // immutability
 // ERROR - Index signature in type 'Dict<number>' only permits reading:
@@ -63,4 +64,9 @@ console.log(toArray(oops)) // [['key', 1], ['test', 123]]
 // dict, previously converted to array, can be converted back with fromArray
 console.log(fromArray(toArray(oops))) // { key: 1, test: 123 }
 
+// filter
+console.log(filter(oops, x => x > 10)) // { test: 123 }
+
+// map
+console.log(map(oops, x => `${x}`)) // { key: '1', test: '123' }
 ```

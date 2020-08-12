@@ -1,4 +1,4 @@
-import { dict, put, omit, toArray, Dict, fromArray, KeyValueArray } from '../src'
+import { dict, put, omit, toArray, Dict, fromArray, KeyValueArray, map, filter } from '../src'
 
 test('put - key doesn\'t exist', () => {
   const initial = dict<number>()
@@ -47,4 +47,20 @@ test('fromArray', () => {
 
   expect(fromArray(initial)).toEqual(expected)
   expect(initial).toEqual([['test', 123], ['key', 321]])
+})
+
+test('filter', () => {
+  const initial: Dict<number> = { x: 1, y: 100, z: 5 }
+  const expected: Dict<number> = { y: 100 }
+
+  expect(filter(initial, x => x > 10)).toEqual(expected)
+  expect(initial).toEqual({ x: 1, y: 100, z: 5 })
+})
+
+test('map', () => {
+  const initial: Dict<number> = { x: 1, y: 100, z: 5, _: undefined }
+  const expected: Dict<string> = { x: '1', y: '100', z: '5' }
+
+  expect(map(initial, x => `${x}`)).toEqual(expected)
+  expect(initial).toEqual({ x: 1, y: 100, z: 5, _: undefined })
 })

@@ -22,9 +22,11 @@ export const dict = <T>(o: Dict<T> = {}): Dict<T> => o
  * @param value entry value
  * @returns `Dict`
  */
-export const put = <T>(dict: Dict<T>, key: string, value: NonNullable<T>): Dict<T> => (
-  { ...dict, [key]: value }
-)
+export const put = <T>(
+  dict: Dict<T>,
+  key: string,
+  value: NonNullable<T>
+): Dict<T> => ({ ...dict, [key]: value })
 
 /**
  * Creates a new `Dict` by removing an entry from existing `Dict`
@@ -33,18 +35,14 @@ export const put = <T>(dict: Dict<T>, key: string, value: NonNullable<T>): Dict<
  * @param key key to remove
  * @returns `Dict`
  */
-export const omit = <T>(dict: Dict<T>, key: string): Dict<T> => (
-  Object.keys(dict).reduce(
-    (acc, k) => {
-      if (k !== key) {
-        acc[k] = dict[k]
-      }
+export const omit = <T>(dict: Dict<T>, key: string): Dict<T> =>
+  Object.keys(dict).reduce((acc, k) => {
+    if (k !== key) {
+      acc[k] = dict[k]
+    }
 
-      return acc
-    },
-    {} as Partial<Dict<T>>
-  )
-)
+    return acc
+  }, {} as Partial<Dict<T>>)
 
 /**
  * Converts a `Dict` to `KeyValueArray`
@@ -54,20 +52,16 @@ export const omit = <T>(dict: Dict<T>, key: string): Dict<T> => (
  * @param dict original `Dict`
  * @returns Array of `Dict` entries
  */
-export const toArray = <T>(dict: Dict<T>): KeyValueArray<T> => (
-  Object.keys(dict).reduce(
-    (acc, key) => {
-      const val = dict[key]
+export const toArray = <T>(dict: Dict<T>): KeyValueArray<T> =>
+  Object.keys(dict).reduce((acc, key) => {
+    const val = dict[key]
 
-      if (val !== undefined) {
-        acc.push([key, val])
-      }
+    if (val !== undefined) {
+      acc.push([key, val])
+    }
 
-      return acc
-    },
-    [] as [string, NonNullable<T>][]
-  )
-)
+    return acc
+  }, [] as [string, NonNullable<T>][])
 
 /**
  * Converts a `KeyValueArray` to `Dict`
@@ -83,3 +77,42 @@ export const fromArray = <T>(array: KeyValueArray<T>): Dict<T> => {
 
   return dict as Dict<T>
 }
+
+/**
+ * Creates a new `Dict` by filtering an existing `Dict`
+ *
+ * @param dict original `Dict`
+ * @param fn predicate function
+ * @returns `Dict`
+ */
+export const filter = <T>(dict: Dict<T>, fn: (item: T, key: string) => boolean): Dict<T> =>
+  Object.keys(dict).reduce((acc, key) => {
+    const val = dict[key]
+
+    if (val !== undefined && fn(val, key)) {
+      acc[key] = val
+    }
+
+    return acc
+  }, {} as Partial<Dict<T>>)
+
+/**
+ * Creates a new `Dict` by mapping an existing `Dict`
+ *
+ * @param dict original `Dict`
+ * @param fn mapping function
+ * @returns `Dict`
+ */
+export const map = <T, U>(
+  dict: Dict<T>,
+  fn: (item: T, key: string) => NonNullable<U>
+): Dict<U> =>
+  Object.keys(dict).reduce((acc, key) => {
+    const val = dict[key]
+
+    if (val !== undefined) {
+      acc[key] = fn(val, key)
+    }
+
+    return acc
+  }, {} as Partial<Dict<U>>)
