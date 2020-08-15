@@ -3,9 +3,9 @@
 [![npm version](https://badge.fury.io/js/ts-micro-dict.svg?t=1495378566925)](https://badge.fury.io/js/ts-micro-dict)
 [![CircleCI](https://circleci.com/gh/iyegoroff/ts-micro-dict.svg?style=svg)](https://circleci.com/gh/iyegoroff/ts-micro-dict)
 [![codecov](https://codecov.io/gh/iyegoroff/ts-micro-dict/branch/master/graph/badge.svg?t=1520230083925)](https://codecov.io/gh/iyegoroff/ts-micro-dict)
+[![Type Coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fiyegoroff%2Fts-micro-dict%2Fmaster%2Fpackage.json)](https://github.com/plantain-00/type-coverage)
 [![Dependency Status](https://david-dm.org/iyegoroff/ts-micro-dict.svg?t=1495378566925)](https://david-dm.org/iyegoroff/ts-micro-dict)
 [![devDependencies Status](https://david-dm.org/iyegoroff/ts-micro-dict/dev-status.svg)](https://david-dm.org/iyegoroff/ts-micro-dict?type=dev)
-[![typings included](https://img.shields.io/badge/typings-included-brightgreen.svg?t=1495378566925)](src/index.d.ts)
 [![npm](https://img.shields.io/npm/l/ts-micro-dict.svg?t=1495378566925)](https://www.npmjs.com/package/ts-micro-dict)
 
 Functions for representing plain objects as typesafe immutable dictionaries

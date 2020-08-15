@@ -7,7 +7,7 @@
   "browser": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "preversion": "npm run lint && npm run build && npm t",
+    "preversion": "npm run lint && npm run build && npm t && npm run type-coverage",
     "postversion": "git push && git push --tags",
     "build:dts": "tsc -p . -d true --emitDeclarationOnly true --removeComments false",
     "build:umd": "tsc -p . -m umd -t es5 --outDir ./dist/umd",
@@ -16,7 +16,8 @@
     "lint": "tslint -p . && tslint test/*",
     "watch": "tsc -p . -w",
     "test": "jest",
-    "coverage": "codecov"
+    "coverage": "codecov",
+    "type-coverage": "type-coverage --detail --strict"
   },
   "keywords": [
     "dictionary",
@@ -46,6 +47,7 @@
     "tslint": "^6.1.3",
     "tslint-config-standard": "^9.0.0",
     "tslint-immutable": "^6.0.1",
+    "type-coverage": "^2.9.0",
     "typescript": "^3.9.7"
   },
   "jest": {
@@ -65,5 +67,8 @@
     "coverageDirectory": "coverage",
     "collectCoverage": true,
     "testEnvironment": "node"
+  },
+  "typeCoverage": {
+    "atLeast": 100
   }
 }

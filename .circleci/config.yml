@@ -7,22 +7,12 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - dependencies-{{ checksum "package-lock.json" }}
-            - dependencies-
-
       - run: npm i
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-{{ checksum "package-lock.json" }}
-
       - run: npm run lint
       - run: npm run build
       - run: npm t
       - run: npm run coverage
+      - run: npm run type-coverage
 
       - persist_to_workspace:
           root: .

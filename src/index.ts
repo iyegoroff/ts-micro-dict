@@ -2,7 +2,8 @@ export type Dict<T> = {
   readonly [key: string]: NonNullable<T> | undefined
 }
 
-export type KeyValueArray<T> = ReadonlyArray<Readonly<[string, NonNullable<T>]>>
+export type KeyValue<T> = Readonly<[string, NonNullable<T>]>
+export type KeyValueArray<T> = ReadonlyArray<KeyValue<T>>
 
 /**
  * Creates a new `Dict` from a dict-like object.
@@ -70,12 +71,12 @@ const toArray = <T>(dict: Dict<T>): KeyValueArray<T> =>
  * @returns `Dict`
  */
 const fromArray = <T>(array: KeyValueArray<T>): Dict<T> => {
-  const dict: { [key: string]: T } = {}
+  const dict: { [key: string]: NonNullable<T> } = {}
   for (const [key, value] of array) {
     dict[key] = value
   }
 
-  return dict as Dict<T>
+  return dict
 }
 
 /**
