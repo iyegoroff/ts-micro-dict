@@ -54,13 +54,8 @@ const omit = <T>(dict: Dict<T>, key: string): Dict<T> =>
  * @returns Array of `Dict` entries
  */
 const toArray = <T>(dict: Dict<T>): KeyValueArray<T> =>
-  Object.keys(dict).reduce((acc, key) => {
-    const val = dict[key]
-
-    if (val !== undefined) {
-      acc.push([key, val])
-    }
-
+  reduce(dict, (acc, item, key) => {
+    acc.push([key, item])
     return acc
   }, [] as [string, NonNullable<T>][])
 
@@ -87,11 +82,9 @@ const fromArray = <T>(array: KeyValueArray<T>): Dict<T> => {
  * @returns `Dict`
  */
 const filter = <T>(dict: Dict<T>, fn: (item: T, key: string) => boolean): Dict<T> =>
-  Object.keys(dict).reduce((acc, key) => {
-    const val = dict[key]
-
-    if (val !== undefined && fn(val, key)) {
-      acc[key] = val
+  reduce(dict, (acc, item, key) => {
+    if (fn(item, key)) {
+      acc[key] = item
     }
 
     return acc
@@ -108,15 +101,29 @@ const map = <T, U>(
   dict: Dict<T>,
   fn: (item: T, key: string) => NonNullable<U>
 ): Dict<U> =>
-  Object.keys(dict).reduce((acc, key) => {
-    const val = dict[key]
-
-    if (val !== undefined) {
-      acc[key] = fn(val, key)
-    }
-
+  reduce(dict, (acc, item, key) => {
+    acc[key] = fn(item, key)
     return acc
   }, {} as Partial<Dict<U>>)
+
+/**
+ * Creates a new object by reducing an existing `Dict`
+ *
+ * @param dict original `Dict`
+ * @param fn mapping function
+ * @param initial initial value
+ * @returns `U`
+ */
+const reduce = <T, U>(
+  dict: Dict<T>,
+  fn: (acc: U, item: NonNullable<T>, key: string) => U,
+  initial: U
+): U =>
+  Object.keys(dict).reduce((acc, key) => {
+    const item = dict[key]
+
+    return item !== undefined ? fn(acc, item, key) : acc
+  }, initial)
 
 export const Dict = {
   create: dict,
@@ -124,6 +131,7 @@ export const Dict = {
   omit,
   filter,
   map,
+  reduce,
   toArray,
   fromArray
 } as const
